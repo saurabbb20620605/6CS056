@@ -1,25 +1,16 @@
-@extends('layouts.app')
-
-@section('title', 'Student Details - Institute Portal')
-
-@section('content')
-<div class="container-narrow">
+<x-layouts.app title="Student Details" :narrow="true">
     <div class="page-header">
         <div>
             <h1 class="page-title">{{ $student->name }}</h1>
             <p class="page-subtitle">Student Record #{{ $student->id }}</p>
         </div>
         <div class="actions-group">
-            <a href="/students" class="btn btn-secondary">&larr; Back</a>
-            <a href="/students/{{ $student->id }}/edit" class="btn btn-primary">Edit Student</a>
+            <a href="{{ route('students.index') }}" class="btn btn-secondary">&larr; Back</a>
+            <a href="{{ route('students.edit', $student) }}" class="btn btn-primary">Edit Student</a>
         </div>
     </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <x-alert />
 
     <div class="card">
         <div class="card-body">
@@ -46,7 +37,12 @@
 
                 <div class="detail-item">
                     <div class="detail-label">Date of Birth</div>
-                    <div class="detail-value">{{ $student->date_of_birth ?? 'Not provided' }}</div>
+                    <div class="detail-value">{{ $student->date_of_birth?->format('d M Y') ?? 'Not provided' }}</div>
+                </div>
+
+                <div class="detail-item">
+                    <div class="detail-label">Age</div>
+                    <div class="detail-value">{{ $student->age !== null ? $student->age . ' years' : 'Not available' }}</div>
                 </div>
 
                 <div class="detail-item full-width">
@@ -56,5 +52,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-layouts.app>

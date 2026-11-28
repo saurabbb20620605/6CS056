@@ -40,6 +40,8 @@ body {
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Top Navigation */
@@ -474,4 +476,31 @@ textarea:focus {
     width: 16px;
     height: 16px;
     accent-color: var(--accent);
+}
+
+/* Main Grow & Footer */
+main.page-main {
+    flex: 1;
+}
+
+.footer {
+    background-color: var(--bg-surface);
+    border-top: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 1.15rem 1.5rem;
+    font-size: 0.85rem;
+    margin-top: 3rem;
+}
+
+/* Inline Field Validation Error */
+.field-error {
+    color: var(--danger);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.15rem;
+}
+
+.input-invalid {
+    border-color: var(--danger) !important;
 }

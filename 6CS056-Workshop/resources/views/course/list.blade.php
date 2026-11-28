@@ -1,22 +1,13 @@
-@extends('layouts.app')
-
-@section('title', 'Courses - Institute Portal')
-
-@section('content')
-<div class="container">
+<x-layouts.app title="Courses">
     <div class="page-header">
         <div>
             <h1 class="page-title">Courses</h1>
             <p class="page-subtitle">Manage training programs, duration, fees, and enrollment status.</p>
         </div>
-        <a href="/courses/create" class="btn btn-primary">+ Create Course</a>
+        <a href="{{ route('courses.create') }}" class="btn btn-primary">+ Create Course</a>
     </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <x-alert />
 
     <div class="card">
         <div class="table-wrapper">
@@ -53,13 +44,9 @@
                             </td>
                             <td>
                                 <div class="actions-group">
-                                    <a href="/courses/{{ $course->id }}" class="btn btn-secondary btn-sm">View</a>
-                                    <a href="/courses/{{ $course->id }}/edit" class="btn btn-secondary btn-sm">Edit</a>
-                                    <form action="/courses/{{ $course->id }}" method="POST" style="display:inline;" onsubmit="return confirm('Delete {{ $course->name }}?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
+                                    <a href="{{ route('courses.show', $course) }}" class="btn btn-secondary btn-sm">View</a>
+                                    <a href="{{ route('courses.edit', $course) }}" class="btn btn-secondary btn-sm">Edit</a>
+                                    <x-delete-form :action="route('courses.destroy', $course)" />
                                 </div>
                             </td>
                         </tr>
@@ -68,7 +55,7 @@
                             <td colspan="7">
                                 <div class="empty-state">
                                     <p>No courses available in the catalog yet.</p>
-                                    <a href="/courses/create" class="btn btn-primary">Create Your First Course</a>
+                                    <a href="{{ route('courses.create') }}" class="btn btn-primary">Create Your First Course</a>
                                 </div>
                             </td>
                         </tr>
@@ -77,5 +64,4 @@
             </table>
         </div>
     </div>
-</div>
-@endsection
+</x-layouts.app>

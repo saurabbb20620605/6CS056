@@ -1,25 +1,16 @@
-@extends('layouts.app')
-
-@section('title', 'Course Details - Institute Portal')
-
-@section('content')
-<div class="container-narrow">
+<x-layouts.app title="Course Details" :narrow="true">
     <div class="page-header">
         <div>
             <h1 class="page-title">{{ $course->name }}</h1>
             <p class="page-subtitle">Course Record #{{ $course->id }}</p>
         </div>
         <div class="actions-group">
-            <a href="/courses" class="btn btn-secondary">&larr; Back</a>
-            <a href="/courses/{{ $course->id }}/edit" class="btn btn-primary">Edit Course</a>
+            <a href="{{ route('courses.index') }}" class="btn btn-secondary">&larr; Back</a>
+            <a href="{{ route('courses.edit', $course) }}" class="btn btn-primary">Edit Course</a>
         </div>
     </div>
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <x-alert />
 
     <div class="card">
         <div class="card-body">
@@ -66,5 +57,4 @@
             </div>
         </div>
     </div>
-</div>
-@endsection
+</x-layouts.app>
